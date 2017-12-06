@@ -1,18 +1,47 @@
 
-// Load the npm package: "inquirer"
-var inquirer = require("inquirer");
+// Load the npm package: "request"
+var request = require("request");
 
 // Load the npm package: "node-spotify-api"
 var spotify = require("node-spotify-api");
 
 // Load the npm package: "twitter"
-var twitter = require("twitter");
+var Twitter = require("twitter");
 
 // Requiring our "twitterKeys" module exported from key.js
 var twitterKeys = require("./key.js");
 
-// Grab or assemble the movie name and store it in a variable called "movieName"
+// Create new authenticated twitter user named "client"
+var client = new Twitter(twitterKeys);
+
+// Assign argument after liri.js to "command"
 var command = process.argv[2];
+
+
+console.log("\n------------------------------------");
+console.log("This is the twitterKey object: ");
+console.log(twitterKeys);
+console.log("------------------------------------\n");
+
+console.log("This is the instance of Twitter method 'client':  ");
+console.log(client);
+console.log("------------------------------------\n\n\n\n");
+
+console.log(process.argv[2]);
+
+if (command==="my-tweets"){
+console.log("These are the top tweets from (dpkillian):  \n");
+var params = {screen_name: 'dpkillian'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+
+  	for(i=0; i<tweets.length; i++){
+  		console.log("Tweet #" + i + ": " + tweets[i].text);
+  	}
+  }
+});
+
+};
 
 
 
