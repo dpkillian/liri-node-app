@@ -73,7 +73,6 @@ if (command==="my-tweets"){
 	});
 
 
-
 // "spotify-this-song" condition calls "client.get" method
 } else if (command==="spotify-this-song"){
 
@@ -81,14 +80,14 @@ spotify.search({ type: 'track', query: modifier }, function(err, data) {
   if (err) {
     return console.log('Error occurred: ' + err);
   }
- 
-console.log(data); 
+	console.log("--------------------------------------");
+	 
+	var songInfo = data.tracks.items[0];
 
-console.log("Artist: \t" 		+ data.artist);
-console.log("Song: \t\t" 		+ data.track);
-console.log("Album: \t\t" 		+ data.album);
-console.log("Preview: \t" 		+ data.preview);
-
+	console.log("Artist: \t" 		+ songInfo.artists[0].name);
+	console.log("Song: \t\t" 		+ songInfo.name);
+	console.log("Album: \t\t" 		+ songInfo.album.name);
+	console.log("Preview URL: \t" 	+ songInfo.preview_url);
 
 });
 
