@@ -76,50 +76,50 @@ if (command==="my-tweets"){
 // "spotify-this-song" condition calls "client.get" method
 } else if (command==="spotify-this-song"){
 
-spotify.search({ type: 'track', query: modifier }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
-	console.log("--------------------------------------");
-	 
-	var songInfo = data.tracks.items[0];
+	spotify.search({ type: 'track', query: modifier }, function(err, data) {
+	  if (err) {
+	    return console.log('Error occurred: ' + err);
+	  }
+		console.log("--------------------------------------");
+		 
+		var songInfo = data.tracks.items[0];
 
-	console.log("Artist: \t" 		+ songInfo.artists[0].name);
-	console.log("Song: \t\t" 		+ songInfo.name);
-	console.log("Album: \t\t" 		+ songInfo.album.name);
-	console.log("Preview URL: \t" 	+ songInfo.preview_url);
+		console.log("Artist: \t" 		+ songInfo.artists[0].name);
+		console.log("Song: \t\t" 		+ songInfo.name);
+		console.log("Album: \t\t" 		+ songInfo.album.name);
+		console.log("Preview URL: \t" 	+ songInfo.preview_url);
 
-});
+	});
 
 
 
 } else if (command==="movie-this"){
 
-// Then run a request to the OMDB API with the movie specified
-var queryUrl = "http://www.omdbapi.com/?t=" + modifier + "&y=&plot=short&apikey=trilogy";
+	// Then run a request to the OMDB API with the movie specified
+	var queryUrl = "http://www.omdbapi.com/?t=" + modifier + "&y=&plot=short&apikey=trilogy";
 
-// Then create a request to the queryUrl
-request(queryUrl, function(error, response, body){
+	// Then create a request to the queryUrl
+	request(queryUrl, function(error, response, body){
 
-  if (!error && response.statusCode === 200) {
+	  if (!error && response.statusCode === 200) {
 
-    // Then log the body from the site!
-    console.log("--------------------------------------");
-    console.log("The movie title is: \t" 	+ JSON.parse(body).Title);
-    console.log("The release year is: \t" 	+ JSON.parse(body).Year);    
-    console.log("The IMDB rating: \t" 		+ JSON.parse(body).Ratings[0].Value);
-    console.log("Rotten Tomato rating: \t"	+ JSON.parse(body).Ratings[1].Value);
-    console.log("The produced in: \t"		+ JSON.parse(body).Country);
-    console.log("The genre is: \t\t" 		+ JSON.parse(body).Genre);
-    console.log("Language: \t\t" 			+ JSON.parse(body).Language);
-    console.log("The director is: \t" 		+ JSON.parse(body).Director);
-    console.log("The actors are: \t" 		+ JSON.parse(body).Actors);
-    console.log("The plot: \n" 				+ JSON.parse(body).Plot);
-    console.log("--------------------------------------");
-    console.log("\n");
-  }
+	    // Then log the body from the site!
+	    console.log("--------------------------------------");
+	    console.log("The movie title is: \t" 	+ JSON.parse(body).Title);
+	    console.log("The release year is: \t" 	+ JSON.parse(body).Year);    
+	    console.log("The IMDB rating: \t" 		+ JSON.parse(body).Ratings[0].Value);
+	    console.log("Rotten Tomato rating: \t"	+ JSON.parse(body).Ratings[1].Value);
+	    console.log("The produced in: \t"		+ JSON.parse(body).Country);
+	    console.log("The genre is: \t\t" 		+ JSON.parse(body).Genre);
+	    console.log("Language: \t\t" 			+ JSON.parse(body).Language);
+	    console.log("The director is: \t" 		+ JSON.parse(body).Director);
+	    console.log("The actors are: \t" 		+ JSON.parse(body).Actors);
+	    console.log("The plot: \n" 				+ JSON.parse(body).Plot);
+	    console.log("--------------------------------------");
+	    console.log("\n");
+	  }
 
-});
+	});
 
 } else if (command==="do-what-it-says"){
 
