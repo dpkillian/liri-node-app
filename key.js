@@ -1,6 +1,3 @@
-console.log("\n------------------------------------");
-console.log("\nJavaScript module 'twitterKeys' this is loaded!");
-
 var twitterKeys = {
   consumer_key: "Tykoyi1Q0Z5jw660UZqVXKJI6",
   consumer_secret: "chfAaYXflkzSOFVeF78mf9NMUAo2RPagjPamRENMOrHwsisChy",

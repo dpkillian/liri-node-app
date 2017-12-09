@@ -29,6 +29,9 @@ var twitterKeys = require("./key.js");
 var client = new Twitter(twitterKeys);
 
 
+// FS PACKAGE INSTALL
+var fs = require("fs");
+
 
 // COMMAND LINE PARSING
 // Assign argument after liri.js to "command"
@@ -56,6 +59,7 @@ var modifier 	= process.argv[3];
 // "My Tweets" condition calls "client.get" method from Twitter node module
 // which "gets" the top tweets from user: dpkillian
 if (command==="my-tweets"){
+    console.log("--------------------------------------");
 	console.log("These are the top tweets from (dpkillian):  \n");
 	var params = {screen_name: 'dpkillian'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -101,25 +105,51 @@ request(queryUrl, function(error, response, body){
   if (!error && response.statusCode === 200) {
 
     // Then log the body from the site!
-    console.log("The movie title is: " 	+ JSON.parse(body).Title);
-    console.log("The release year is: " + JSON.parse(body).Year);    
-    console.log("The rating: " 			+ JSON.parse(body).Rated);
-    console.log("The genre is: " 		+ JSON.parse(body).Genre);
-    console.log("The director is: " 	+ JSON.parse(body).Director);
-    console.log("The actors are: " 		+ JSON.parse(body).Actors);
-    console.log("The plot: " 			+ JSON.parse(body).Plot);
+    console.log("--------------------------------------");
+    console.log("The movie title is: \t" 	+ JSON.parse(body).Title);
+    console.log("The release year is: \t" 	+ JSON.parse(body).Year);    
+    console.log("The IMDB rating: \t" 		+ JSON.parse(body).Ratings[0].Value);
+    console.log("Rotten Tomato rating: \t"	+ JSON.parse(body).Ratings[1].Value);
+    console.log("The produced in: \t"		+ JSON.parse(body).Country);
+    console.log("The genre is: \t\t" 		+ JSON.parse(body).Genre);
+    console.log("Language: \t\t" 			+ JSON.parse(body).Language);
+    console.log("The director is: \t" 		+ JSON.parse(body).Director);
+    console.log("The actors are: \t" 		+ JSON.parse(body).Actors);
+    console.log("The plot: \n" 				+ JSON.parse(body).Plot);
     console.log("--------------------------------------");
     console.log("\n");
   }
 
 });
 
- 
-
 } else if (command==="do-what-it-says"){
 
 
-}
+// This block of code will read from the "movies.txt" file.
+// It's important to include the "utf8" parameter or the code will provide stream data (garbage)
+// The code will store the contents of the reading inside the variable "data"
+fs.readFile("random.txt", "utf8", function(error, data) {
+
+  // If the code experiences any errors it will log the error to the console.
+  if (error) {
+    return console.log(error);
+  }
+
+  // We will then print the contents of data
+  console.log(data);
+
+  // Then split it by commas (to make it more readable)
+  var dataArr = data.split(",");
+
+  // We will then re-display the content as an array for later use.
+  console.log(dataArr);
+
+});
+
+
+
+	};
+
 
 
 
