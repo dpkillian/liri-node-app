@@ -58,8 +58,8 @@ function evalCommand(command, modifier){
 	// MAIN CONDITIONAL
 	// Compound "if-else if" statement which determines which command is being run
 
-	// "My Tweets" condition calls "client.get" method from Twitter node module
-	// which "gets" the top tweets from user: dpkillian
+	// "my-tweets" condition calls "client.get" method from Twitter node module
+	// which "gets" the top tweets from user: dpkillian and write to "response" for parsing
 	if (command==="my-tweets"){
 	    console.log("--------------------------------------");
 		console.log("These are the top tweets from (dpkillian):  \n");
@@ -75,7 +75,8 @@ function evalCommand(command, modifier){
 		});
 
 
-	// "spotify-this-song" condition calls "client.get" method
+	// "spotify-this-song" condition calls "spotigy.search" method to pass type and song info
+	// to Spotify and write info back to "data" for later parsing
 	} else if (command==="spotify-this-song"){
 
 		spotify.search({ type: 'track', query: modifier }, function(err, data) {
@@ -83,9 +84,11 @@ function evalCommand(command, modifier){
 		    return console.log('Error occurred: ' + err);
 		  }
 			console.log("--------------------------------------");
-			 
+
+			// Shorten the parsed key names 
 			var songInfo = data.tracks.items[0];
 
+			// Console log the results
 			console.log("Artist: \t" 		+ songInfo.artists[0].name);
 			console.log("Song: \t\t" 		+ songInfo.name);
 			console.log("Album: \t\t" 		+ songInfo.album.name);
@@ -94,7 +97,8 @@ function evalCommand(command, modifier){
 		});
 
 
-
+	// "movie-this" condition calls "omdb" API to pass movie anme
+	// to omdb and write info back to "response" for parsing
 	} else if (command==="movie-this"){
 
 		// Then run a request to the OMDB API with the movie specified
@@ -103,9 +107,10 @@ function evalCommand(command, modifier){
 		// Then create a request to the queryUrl
 		request(queryUrl, function(error, response, body){
 
+		  // Check to see if there is no error, and the response code is "ok"
 		  if (!error && response.statusCode === 200) {
 
-		    // Then log the body from the site!
+			// Console log the results
 		    console.log("--------------------------------------");
 		    console.log("The movie title is: \t" 	+ JSON.parse(body).Title);
 		    console.log("The release year is: \t" 	+ JSON.parse(body).Year);    
@@ -157,6 +162,7 @@ function evalCommand(command, modifier){
 	};
 }
 
+// Start the main conditional to evaluate the user input
 evalCommand(command, modifier);
 
 
