@@ -8,7 +8,7 @@ LIRI supports the following commands:
 
 Prototype command structure
 
-none liri.js <command> <modifier>
+node liri.js <command> <modifier>
 
 
 Example useage
