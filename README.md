@@ -7,9 +7,14 @@ LIRI supports the following commands:
 - do-what-it-says: which will read the command in the file "random.txt" to perform one of the above commands
 
 Prototype command structure
+
 none liri.js <command> <modifier>
 
+
 Example useage
+
 node liri.js movie-this "star wars"
+
 node liri.js spotify-this-song kiss
+
 node liri.js do-what-it-says
